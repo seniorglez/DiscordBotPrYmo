@@ -32,7 +32,6 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [Diego Dominguez Gonzalez](https://github.com/seniorglez).<br />
 This project is [GPL3](https://www.gnu.org/licenses/gpl-3.0.en.html) licensed.
 
 ***
