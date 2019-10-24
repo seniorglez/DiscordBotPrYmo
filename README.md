@@ -34,5 +34,7 @@ Give a ⭐️ if this project helped you!
 
 This project is [GPL3](https://www.gnu.org/licenses/gpl-3.0.en.html) licensed.
 
+![alt text](https://www.gnu.org/graphics/gplv3-with-text-136x68.png)
+
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
