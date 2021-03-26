@@ -15,6 +15,20 @@
 
 ## Usage
 
+Install requirements.
+
+```sh
+pip3 -r requirements.txt
+```
+
+Set the env var DISCORD_TOKEN:
+
+```sh
+DISCORD_TOKEN=yourTokenHere
+```
+
+Launch the freaking bot!
+
 ```sh
 python discordbot.py
 ```
@@ -41,7 +55,7 @@ Here is the expected output:
 
 Now you can run the image:
 ```bash
-    docker run discordbot
+    docker run -e "DISCORD_TOKEN=yourTokenHere" discordbot
 ```
 
 ## Author

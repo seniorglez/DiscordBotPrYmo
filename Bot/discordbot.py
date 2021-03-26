@@ -15,6 +15,19 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left a server.')
 
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+       await ctx.send('Porfavor introduce los argumentos adecuados, maldito usuario')
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game("Emacs, Stallman was rigth"))
+
 #Commands----------------------------------------------------------------------
 
 @client.command()
@@ -41,25 +54,10 @@ async def unload(ctx, extension):
     '''
     client.unload_extension(f'cogs.{extension}')
 
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-       await ctx.send('Porfavor introduce los argumentos adecuados, maldito usuario')
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game("Emacs, Stallman was rigth"))
-
-#Test------------------------------------------------------------------------------------------------
 # this will have the bot join the channel you are in
 
 @client.command(pass_context=True, brief="Makes the bot join your channel", aliases=['j', 'jo'])
 async def join(ctx):
-        
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
@@ -88,5 +86,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-print(TOKEN)
 client.run(TOKEN)
