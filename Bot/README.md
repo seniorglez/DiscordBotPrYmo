@@ -18,6 +18,31 @@
 ```sh
 python discordbot.py
 ```
+## Docker
+
+Build the docker image:
+
+```bash
+    docker build -t discordbot .
+```
+
+List the avariable images and check that you have discordbot
+
+```bash
+    docker images -a
+```
+
+Here is the expected output:
+
+```bash
+    REPOSITORY                     TAG                 IMAGE ID       CREATED              SIZE
+    discordbot                     latest              a8eca6ff9c48   44 seconds ago       138MB
+```
+
+Now you can run the image:
+```bash
+    docker run discordbot
+```
 
 ## Author
 
