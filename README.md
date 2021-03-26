@@ -15,8 +15,47 @@
 
 ## Usage
 
+Install requirements.
+
+```sh
+pip3 -r requirements.txt
+```
+
+Set the env var DISCORD_TOKEN:
+
+```sh
+DISCORD_TOKEN=yourTokenHere
+```
+
+Launch the freaking bot!
+
 ```sh
 python discordbot.py
+```
+## Docker
+
+Build the docker image:
+
+```bash
+    docker build -t discordbot .
+```
+
+List the avariable images and check that you have discordbot
+
+```bash
+    docker images -a
+```
+
+Here is the expected output:
+
+```bash
+    REPOSITORY                     TAG                 IMAGE ID       CREATED              SIZE
+    discordbot                     latest              a8eca6ff9c48   44 seconds ago       138MB
+```
+
+Now you can run the image:
+```bash
+    docker run -e "DISCORD_TOKEN=yourTokenHere" discordbot
 ```
 
 ## Author

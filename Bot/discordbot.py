@@ -3,10 +3,8 @@ import os
 from discord.ext import commands
 from discord.utils import get
 
-
 client = commands.Bot(command_prefix='.')
-
-
+TOKEN = os.getenv('DISCORD_TOKEN')
 #Events------------------------------------------------------------------------
 
 @client.event
@@ -17,11 +15,20 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left a server.')
 
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+       await ctx.send('Porfavor introduce los argumentos adecuados, maldito usuario')
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game("Emacs, Stallman was rigth"))
 
 #Commands----------------------------------------------------------------------
-
-
-
 
 @client.command()
 async def shutdown(ctx):
@@ -47,27 +54,10 @@ async def unload(ctx, extension):
     '''
     client.unload_extension(f'cogs.{extension}')
 
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-       await ctx.send('Porfavor introduce los argumentos adecuados, maldito usuario')
-
-
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game("Emacs, Stallman was rigth"))
-
-#Test------------------------------------------------------------------------------------------------
 # this will have the bot join the channel you are in
 
 @client.command(pass_context=True, brief="Makes the bot join your channel", aliases=['j', 'jo'])
 async def join(ctx):
-        
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
@@ -82,10 +72,7 @@ async def join(ctx):
             voice = await channel.connect()
             print(f"The bot has connected to {channel}")
             
-
-
 # this will have the bot leave the current voice channel source:https://github.com/Penguin1212/Discord-Bot-BotSpud/blob/master/Bot_Spud.py
-
 @client.command(pass_context=True, brief="Makes the bot leave your channel", aliases=['l', 'le', 'lea'])
 async def leave(ctx):
     channel = ctx.message.author.voice.channel
@@ -94,15 +81,9 @@ async def leave(ctx):
         print(f"The bot has left {channel}")
         await voice.disconnect()
                     
-    
-    
-
-
 #This loop loads all the cogs
-
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('')
- 
+client.run(TOKEN)
